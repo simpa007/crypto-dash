@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import CoinCard from "./components/CoinCard";
-import LimitSelector from "./components/LimitSelector";
-import FilterInput from "./components/FilterInput";
-import SortSelector from "./components/SortSelector";
+import { Routes, Route } from "react-router";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -64,33 +65,27 @@ function App() {
 
 	return (
 		<>
-			{isLoading && <p>Loading...</p>}
-			{error && <div className="error">{error}</div>}
-
-			<div className="top-controls">
-				<FilterInput
-					filter={filter}
-					onFilterChange={(e) => setFilter(e.target.value)}
+			<Header />
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<Home
+							filter={filter}
+							limit={limit}
+							sortBy={sortBy}
+							setFilter={setFilter}
+							setLimit={setLimit}
+							setSortBy={setSortBy}
+							isLoading={isLoading}
+							error={error}
+							filterCoins={filterCoins}
+						/>
+					}
 				/>
-				<LimitSelector
-					limit={limit}
-					onLimitChange={(e) => setLimit(e.target.value)}
-				/>
-				<SortSelector
-					sortBy={sortBy}
-					onSortChange={(e) => setSortBy(e.target.value)}
-				/>
-			</div>
-
-			{!isLoading && !error && (
-				<main className="grid">
-					{filterCoins.length > 0 ? (
-						filterCoins.map((coin) => <CoinCard key={coin.id} coin={coin} />)
-					) : (
-						<div>Coin doesnt exits</div>
-					)}
-				</main>
-			)}
+				<Route path="/about" element={<About />} />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
 		</>
 	);
 }
