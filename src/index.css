@@ -272,8 +272,14 @@ a {
 		opacity: 1;
 	}
 }
+.loader-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50vh; /* full screen */
+}
 
-.loader {
+.loader-white {
 	width: 48px;
 	height: 48px;
 	border: 5px solid #fff;
@@ -282,6 +288,17 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	box-sizing: border-box;
+
+	animation: rotation 1s linear infinite;
+}
+
+.loader-black {
+	width: 48px;
+	height: 48px;
+	border: 5px solid #000;
+	border-bottom-color: transparent;
+	border-radius: 50%;
 	box-sizing: border-box;
 
 	animation: rotation 1s linear infinite;

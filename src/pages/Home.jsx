@@ -24,14 +24,18 @@ function Home({
 				/>
 				<LimitSelector
 					limit={limit}
-					onLimitChange={(e) => setLimit(e.target.value)}
+					onLimitChange={(e) => setLimit(Number(e.target.value))}
 				/>
 				<SortSelector
 					sortBy={sortBy}
 					onSortChange={(e) => setSortBy(e.target.value)}
 				/>
 			</div>
-			{isLoading && <span className="loader"></span>}
+			{isLoading && (
+				<div className="loader-wrapper">
+					<span className="loader-white"></span>
+				</div>
+			)}
 			{error && <div className="error">{error}</div>}
 
 			{!isLoading && !error && (
