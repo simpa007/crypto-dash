@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
+import { CoinChart } from "../components/CoinChart";
 
 function CoinDetails() {
 	const [coin, setCoin] = useState(null);
@@ -79,6 +80,8 @@ function CoinDetails() {
 							Last Updated: {new Date(coin.last_updated).toLocaleString()}
 						</h4>
 					</div>
+
+					<CoinChart coinId={coin.id} />
 
 					<div className="coins-details-link">
 						{coin.links.homepage[0] && (
